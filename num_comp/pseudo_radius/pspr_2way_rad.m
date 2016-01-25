@@ -1,4 +1,4 @@
-function [rbest, thetabest] = pspr_2way_rad(A, mE, theta, realtol, plotfig, rold, iter,h)
+function [rbest, thetabest] = pspr_2way_rad(A, mE, theta, realtol, plotfig, rold, ~,~)
 % Michael Overton and Emre Mengi (Last update on September 2 2014)
 % called by pspr_2way.m
 % Given a set of angles in theta, in each direction finds the point 
@@ -52,9 +52,6 @@ for j=1:length(theta)
 end % end of for
 
 if isempty(rnew)
-    if (n >= 30)
-       close(h)
-    end
     error('no intersection point is found by the radial search(please try smaller epsilon)')
 end
 

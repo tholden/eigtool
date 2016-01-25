@@ -1,5 +1,5 @@
-function thetanew = pspr_2way_theta(A, mE, epsln, r, thetawant, iter, radtol, ...
-     smalltol, plotfig, prtlevel,h)
+function thetanew = pspr_2way_theta(A, mE, epsln, r, thetawant, ~, radtol, ...
+     ~, plotfig, prtlevel,~)
 % Michael Overton and Emre Mengi (Last Update on September 2 2014)
 % called by pspr_2way.m
 % Given a radius r, it first computes the intersection points
@@ -79,9 +79,6 @@ else
    
    
    if (isempty(theta))
-        if (n >= 30)
-            close(h)
-        end
        error('singular value test removed all of the intersection points(please try smaller epsilon)')
    end
 

@@ -56,11 +56,8 @@ end
 
 
 
-if (n >= 30)
-    h = waitbar(0,'Computing Pseudospectral Radius...(initializing)');
-else
+
     h = 0;
-end
 
 
 
@@ -86,13 +83,6 @@ if epsln == 0  % pseudospectrum is just the spectrum
    ind = find(abs(eA) >= f - smalltol);
    z = eA(ind);
    
-   if (n >= 30)
-       waitbar(1,h,'Computing Pseudospectral Radius...(completed)')
-   end
-   
-   if (n >= 30)
-       close(h)
-   end
 else
     if (epsln < 10^-9)
         warning('epsilon is too small, the result may not be accurate enough')
@@ -134,9 +124,7 @@ else
       
       
       if iter > 20
-          if (n >= 30)
-            close(h)
-          end
+
          error('pspr_2way: too many steps')
       end
       
@@ -153,12 +141,7 @@ else
       [r, thetabest] = pspr_2way_rad(A, mE, theta, realtol, plotfig, rold, iter,h);
       
       ptout = sprintf('Computing Pseudospectral Radius...(iteration %d)',iter);
-      
-      if (n >= 30)
-          waitbar((2*(iter-1)+1)/12,h,ptout)
-      end
-
-          
+               
       if r > rold
       	% given current r, look for all relevant intersections of the circle
       	% with radius r with the pseudospectrum, process and return pair midpoints.
@@ -173,9 +156,6 @@ else
         thetaold = theta;
       	theta = pspr_2way_theta(A, mE, epsln, r, thetabest, iter, radtol, ...
           	 smalltol, plotfig, prtlevel,h);
-        if (n >= 30)
-            waitbar((2*(iter-1)+2)/12,h)
-        end
 
         if keyb ~= 0
             keyboard
@@ -192,10 +172,6 @@ else
         r = rold;
     end % end of else
    end % end of while
-
-   if (n >= 30)
-       waitbar(1,h,'Computing Pseudospectral Radius...(completed)')
-   end
    
    % print additional information
    if prtlevel > 0
@@ -207,9 +183,6 @@ else
    
    
    if isempty(thetabest)
-        if (n >= 30)
-            close(h)
-        end
        error('Failed in the first iteration (please choose a bigger epsilon)');
    end
    
@@ -221,11 +194,4 @@ else
        z = [z; r*(cos(thetabest) - i*sin(thetabest))];
    end
    
-    
-   
-   
-   
-   if (n >= 30)
-       close(h)
-   end
 end
